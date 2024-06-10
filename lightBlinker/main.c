@@ -21,7 +21,8 @@ int main(void)
 
     PORTB = 0b00000000; /* Turn off all B pins, including LED */
     _delay_ms(1000);    /* wait */
+  }
 
-  } /* End event loop */
-  return 0; /* This line is never reached */
+  /* This line is never reached */
+  return 0;
 }

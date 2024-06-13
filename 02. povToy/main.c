@@ -4,23 +4,36 @@
 #include <avr/io.h>     /* Defines pins, ports, etc */
 #include <util/delay.h> /* Functions to waste time */
 
+void setPortDVoltage(uint8_t values)
+{
+  PORTD = values;
+  _delay_ms(2);
+}
+
 int main(void)
 {
 
   // -------- Inits --------- //
-  DDRB |= 0b00000001; /* Data Direction Register B:
-                        writing a one to the bit
-                        enables output. */
+  /* Data Direction Register D: writing a one to the bit enables output. */
+  DDRD |= 0b11111111;
 
   // ------ Event loop ------ //
   while (1)
   {
+    setPortDVoltage(0b00001110);
+    setPortDVoltage(0b00011000);
+    setPortDVoltage(0b10111101);
+    setPortDVoltage(0b01110110);
+    setPortDVoltage(0b00111100);
+    setPortDVoltage(0b00111100);
+    setPortDVoltage(0b00111100);
+    setPortDVoltage(0b01110110);
+    setPortDVoltage(0b10111101);
+    setPortDVoltage(0b00011000);
+    setPortDVoltage(0b00001110);
 
-    PORTB = 0b00000001; /* Turn on first LED bit/pin in PORTB */
-    _delay_ms(1000);    /* wait */
-
-    PORTB = 0b00000000; /* Turn off all B pins, including LED */
-    _delay_ms(1000);    /* wait */
+    setPortDVoltage(0b00000000);
+    _delay_ms(10);
   }
 
   /* This line is never reached */
